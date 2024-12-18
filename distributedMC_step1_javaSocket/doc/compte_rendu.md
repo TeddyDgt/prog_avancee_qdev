@@ -697,7 +697,7 @@ La **scalabilité forte** mesure l’évolution du temps d’exécution lorsque 
 
 #### **Graphique : Scalabilité Forte - MonteCarlo Distribué**
 
-![Scalabilité Forte - MonteCarlo Distribué](MonteCarlo_Strong_Scaling.png)
+![Scalabilité Forte - MonteCarlo Distribué](img/MonteCarlo_Strong_Scaling.png)
 
 **Analyse :**
 
@@ -712,7 +712,7 @@ La **scalabilité faible** mesure l’évolution du temps d’exécution lorsque
 
 #### **Graphique : Scalabilité Faible - MonteCarlo Distribué**
 
-![Scalabilité Faible - MonteCarlo Distribué](MonteCarlo_Weak_Scaling.png)
+![Scalabilité Faible - MonteCarlo Distribué](img/MonteCarlo_Weak_Scaling.png)
 
 **Analyse :**
 
