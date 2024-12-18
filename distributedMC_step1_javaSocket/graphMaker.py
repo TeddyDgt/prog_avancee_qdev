@@ -7,134 +7,76 @@ input_folder = "perfs"
 output_folder = "courbe"
 os.makedirs(output_folder, exist_ok=True)
 
-# Fonction pour générer le graphique de speed-up pour la scalabilité forte (Assignment102)
-def generate_strong_scaling_speedup():
-    csv_file = os.path.join(input_folder, "performanceSS_assignment102.csv")
+# Fonction pour générer le graphique de scalabilité forte
+def generate_strong_scaling_montecarlo():
+    csv_file = os.path.join(input_folder, "MonteCarlo_Distribue_Strong.csv")
     df = pd.read_csv(csv_file)
-    
+
     # Calcul du speed-up pour la scalabilité forte
-    baseline_time = df['timeDurationNs'].iloc[0]
-    df['speedUp'] = baseline_time / df['timeDurationNs']
-    
+    baseline_time = df['Temps'].iloc[0]
+    df['SpeedUp'] = baseline_time / df['Temps']
+
     # Tracer le graphique
     plt.figure(figsize=(10, 6))
-    plt.plot(df['numProcessors'], df['speedUp'], marker='o', linestyle='-', label='Speed-up Réel')
-    plt.plot(df['numProcessors'], df['numProcessors'], 'r--', label='Speed-up Idéal')
+    plt.plot(df['Nb Processeurs'], df['SpeedUp'], marker='o', linestyle='-', label='Speed-up Réel')
+    plt.plot(df['Nb Processeurs'], df['Nb Processeurs'], 'r--', label='Speed-up Idéal')
     plt.xlabel('Nombre de processeurs')
     plt.ylabel('Speed-up')
-    plt.title('Scalabilité Forte - Speed-up (Assignment102)')
+    plt.title('Scalabilité Forte - MonteCarlo Distribué')
     plt.legend()
     plt.grid(True)
-    plt.xticks(df['numProcessors'])
+    plt.xticks(df['Nb Processeurs'])
     
     # Enregistrer le graphique
-    output_path = os.path.join(output_folder, "performanceSS_speedup.png")
+    output_path = os.path.join(output_folder, "MonteCarlo_Strong_Scaling.png")
     plt.savefig(output_path)
     plt.show()
 
-# Fonction pour générer le graphique de speed-up pour la scalabilité faible (Assignment102)
-def generate_weak_scaling_speedup():
-    csv_file = os.path.join(input_folder, "performanceWS_assignment102.csv")
+# Fonction pour générer le graphique de scalabilité faible
+def generate_weak_scaling_montecarlo():
+    csv_file = os.path.join(input_folder, "MonteCarlo_Distribue_Weak.csv")
     df = pd.read_csv(csv_file)
-    
+
     # Calcul du speed-up pour la scalabilité faible
-    baseline_time = df['timeDurationNs'].iloc[0]
-    df['speedUp'] = baseline_time / df['timeDurationNs']
-    
+    baseline_time = df['Temps'].iloc[0]
+    df['SpeedUp'] = baseline_time / df['Temps']
+
     # Tracer le graphique
     plt.figure(figsize=(10, 6))
-    plt.plot(df['numProcessors'], df['speedUp'], marker='o', linestyle='-', label='Speed-up Réel')
+    plt.plot(df['Nb Processeurs'], df['SpeedUp'], marker='o', linestyle='-', label='Speed-up Réel')
     plt.axhline(y=1.0, color='r', linestyle='-', label='Speed-up Idéal')
     plt.xlabel('Nombre de processeurs')
     plt.ylabel('Speed-up')
-    plt.title('Scalabilité Faible - Speed-up (Assignment102)')
+    plt.title('Scalabilité Faible - MonteCarlo Distribué')
     plt.legend()
     plt.grid(True)
-    plt.xticks(df['numProcessors'])
+    plt.xticks(df['Nb Processeurs'])
     
     # Enregistrer le graphique
-    output_path = os.path.join(output_folder, "performanceWS_speedup.png")
-    plt.savefig(output_path)
-    plt.show()
-
-# Fonction pour générer le graphique de speed-up pour la scalabilité forte (Pi)
-def generate_strong_scaling_speedup_pi():
-    csv_file = os.path.join(input_folder, "performanceSS_pi.csv")
-    df = pd.read_csv(csv_file)
-    
-    # Calcul du speed-up pour la scalabilité forte
-    baseline_time = df['timeDurationNs'].iloc[0]
-    df['speedUp'] = baseline_time / df['timeDurationNs']
-    
-    # Tracer le graphique
-    plt.figure(figsize=(10, 6))
-    plt.plot(df['numProcessors'], df['speedUp'], marker='o', linestyle='-', label='Speed-up Réel')
-    plt.plot(df['numProcessors'], df['numProcessors'], 'r--', label='Speed-up Idéal')
-    plt.xlabel('Nombre de processeurs')
-    plt.ylabel('Speed-up')
-    plt.title('Scalabilité Forte - Speed-up (Pi)')
-    plt.legend()
-    plt.grid(True)
-    plt.xticks(df['numProcessors'])
-    
-    # Enregistrer le graphique
-    output_path = os.path.join(output_folder, "performanceSS_pi_speedup.png")
-    plt.savefig(output_path)
-    plt.show()
-
-# Fonction pour générer le graphique de speed-up pour la scalabilité faible (Pi)
-def generate_weak_scaling_speedup_pi():
-    csv_file = os.path.join(input_folder, "performanceWS_pi.csv")
-    df = pd.read_csv(csv_file)
-    
-    # Calcul du speed-up pour la scalabilité faible
-    baseline_time = df['timeDurationNs'].iloc[0]
-    df['speedUp'] = baseline_time / df['timeDurationNs']
-    
-    # Tracer le graphique
-    plt.figure(figsize=(10, 6))
-    plt.plot(df['numProcessors'], df['speedUp'], marker='o', linestyle='-', label='Speed-up Réel')
-    plt.axhline(y=1.0, color='r', linestyle='-', label='Speed-up Idéal')
-    plt.xlabel('Nombre de processeurs')
-    plt.ylabel('Speed-up')
-    plt.title('Scalabilité Faible - Speed-up (Pi)')
-    plt.legend()
-    plt.grid(True)
-    plt.xticks(df['numProcessors'])
-    
-    # Enregistrer le graphique
-    output_path = os.path.join(output_folder, "performanceWS_pi_speedup.png")
+    output_path = os.path.join(output_folder, "MonteCarlo_Weak_Scaling.png")
     plt.savefig(output_path)
     plt.show()
 
 # Menu pour le choix du graphe
 def main():
     print("Choisissez le graphe à afficher :")
-    print("1 - Courbe de Speed-up (Scalabilité Forte - Assignment102)")
-    print("2 - Courbe de Speed-up (Scalabilité Faible - Assignment102)")
-    print("3 - Courbe de Speed-up (Scalabilité Forte - Pi)")
-    print("4 - Courbe de Speed-up (Scalabilité Faible - Pi)")
-    print("Tapez 'pi' pour afficher les courbes 3 et 4")
-    print("Tapez 'all' pour afficher tous les graphes")
+    print("1 - Scalabilité Forte - MonteCarlo Distribué")
+    print("2 - Scalabilité Faible - MonteCarlo Distribué")
+    print("Tapez 'montecarlo' pour afficher les deux graphes")
+    print("Tapez 'all' pour afficher tous les graphes existants")
 
     choice = input("Votre choix : ")
 
     if choice == "1":
-        generate_strong_scaling_speedup()
+        generate_strong_scaling_montecarlo()
     elif choice == "2":
-        generate_weak_scaling_speedup()
-    elif choice == "3":
-        generate_strong_scaling_speedup_pi()
-    elif choice == "4":
-        generate_weak_scaling_speedup_pi()
-    elif choice.lower() == "pi":
-        generate_strong_scaling_speedup_pi()
-        generate_weak_scaling_speedup_pi()
+        generate_weak_scaling_montecarlo()
+    elif choice.lower() == "montecarlo":
+        generate_strong_scaling_montecarlo()
+        generate_weak_scaling_montecarlo()
     elif choice.lower() == "all":
-        generate_strong_scaling_speedup()
-        generate_weak_scaling_speedup()
-        generate_strong_scaling_speedup_pi()
-        generate_weak_scaling_speedup_pi()
+        generate_strong_scaling_montecarlo()
+        generate_weak_scaling_montecarlo()
     else:
         print("Choix invalide.")
 

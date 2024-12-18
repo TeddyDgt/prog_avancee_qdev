@@ -681,9 +681,54 @@ public class MasterSocket {
 }
 ```
 
-# 6. Performance Master/Worker distribué
+# 6. Performance Master/Worker Distribué
+
+## **Introduction**
+
+L’évaluation des performances du modèle **Master/Worker distribué** permet de comprendre comment le système se comporte lorsque le calcul est réparti sur plusieurs machines en réseau. Grâce à cette approche, les tâches peuvent être exécutées en parallèle sur plusieurs processeurs situés sur différentes machines, optimisant ainsi le temps d’exécution des calculs intensifs.
+
+---
+
+## **Analyse des Performances**
+
+### **Scalabilité Forte**
+
+La **scalabilité forte** mesure l’évolution du temps d’exécution lorsque le nombre de processeurs augmente, tandis que la charge de travail totale reste fixe.
+
+#### **Graphique : Scalabilité Forte - MonteCarlo Distribué**
+
+![Scalabilité Forte - MonteCarlo Distribué](MonteCarlo_Strong_Scaling.png)
+
+**Analyse :**
+
+- Le **speed-up réel** augmente avec le nombre de processeurs, mais il reste légèrement inférieur au **speed-up idéal**.
+- La courbe montre une amélioration notable des performances avec l’ajout de processeurs, bien que l’efficacité diminue légèrement à cause de la surcharge de communication entre le **Master** et les **Workers**.
+
+---
+
+### **Scalabilité Faible**
+
+La **scalabilité faible** mesure l’évolution du temps d’exécution lorsque la charge de travail augmente proportionnellement au nombre de processeurs.
+
+#### **Graphique : Scalabilité Faible - MonteCarlo Distribué**
+
+![Scalabilité Faible - MonteCarlo Distribué](MonteCarlo_Weak_Scaling.png)
+
+**Analyse :**
+
+- Le **speed-up réel** reste relativement constant avec l’augmentation du nombre de processeurs.
+- Toutefois, de petites variations apparaissent, probablement dues à la **latence réseau** et à la **répartition inégale de la charge**.
+- L’efficacité globale du système reste élevée, ce qui montre que le modèle Master/Worker distribué fonctionne correctement pour des charges de travail croissantes.
+
+---
+
+## **Conclusion**
+
+- La mise en œuvre du modèle **Master/Worker distribué** permet d’améliorer les performances des calculs parallélisés.
+- La **scalabilité forte** montre que le speed-up augmente avec le nombre de processeurs, bien que des limites apparaissent en raison des communications réseau.
+- La **scalabilité faible** prouve que le système peut gérer efficacement des charges de travail croissantes tout en maintenant un bon niveau de performance.
+- Le modèle Master/Worker distribué est donc une solution adaptée pour les calculs intensifs nécessitant une parallélisation sur plusieurs machines.
 
 
 
-
-Ce compte-rendu a été rédigé avec l'aide de l'intelligence artificielle ChatGPT-4o dans le but de reformuler et de corriger les fautes d'orthographes.
+Ce compte-rendu a été rédigé avec l'aide de l'intelligence artificielle ChatGPT-4o dans le but de reformuler et de corriger les fautes d'orthographe.
